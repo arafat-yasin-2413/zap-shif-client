@@ -3,12 +3,13 @@ import { NavLink } from "react-router";
 import ProFastLogo from "../ProFastLogo/ProFastLogo";
 
 const Navbar = () => {
-
-    const navItems = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/about">About Us</NavLink></li>
-    </>
-
+    const navItems = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/coverage">Coverage</NavLink></li>
+            <li><NavLink to="/about">About Us</NavLink></li>
+        </>
+    );
 
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -42,12 +43,10 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl"> <ProFastLogo></ProFastLogo> </a>
+                <ProFastLogo></ProFastLogo>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    {navItems}
-                </ul>
+                <ul className="menu menu-horizontal px-1">{navItems}</ul>
             </div>
             <div className="navbar-end">
                 <a className="btn">Button</a>
