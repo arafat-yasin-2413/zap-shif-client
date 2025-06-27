@@ -1,7 +1,7 @@
 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';  
 import { useState } from 'react';
 
 const position = [23.6850, 90.3563]; // Center of Bangladesh
@@ -44,12 +44,12 @@ const BangladeshMap = ({ serviceCenters }) => {
             {/* search box */}
             <form
                 onSubmit={handleSearch}
-                className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1000] w-full max-w-md px-4 flex bg-gray-400"
+                className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1000] w-full max-w-md px-4 flex "
             >
                 <input
                     type="text"
                     placeholder="Search district..."
-                    className="flex-1 px-4 py-2 border rounded-l-md outline-none"
+                    className="flex-1 px-4 py-2 border rounded-l-md outline-none bg-gray-400"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                 />
