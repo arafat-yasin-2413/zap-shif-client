@@ -1,17 +1,33 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
+    const {user,signIn} = useAuth();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
+    // console.log(location.state.from);
+
+    const from = location.state?.from || '/';
 
     const onSubmit = (data) => {
         console.log(data);
+        signIn(data.email, data.password)
+        .then(result => {
+            console.log(result);
+            navigate(from)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
     };
 
     return (
