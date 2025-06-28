@@ -1,9 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const PaymentForm = () => {
     const stripe = useStripe();
@@ -12,6 +14,7 @@ const PaymentForm = () => {
     const { user } = useAuth();
     const [error, setError] = useState("");
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     // console.log(parcelId);
 
@@ -83,8 +86,29 @@ const PaymentForm = () => {
                 setError('');
                 if (result.paymentIntent.status === "succeeded") {
                     console.log("Payment Succeed!");
+                    const transactionId = result.paymentIntent.id;
                     console.log(result);
                     // step: 4 --> mark parcel "Paid", create payment history
+                    const paymentData = {
+                        parcelId,
+                        email: user.email,
+                        amount,
+                        transactionId: transactionId,
+                        paymentMethod: result.paymentIntent.payment_method_types
+                    }
+
+                    const paymentRes = await axiosSecure.post('/payments', paymentData);
+                    if(paymentRes.data.insertedId){
+                        // console.log('payment successfull');
+                        await Swal.fire({
+                            icon: 'success',
+                            title: 'Payment has been successfull!',
+                            html: `<strong>Transaction ID: </strong> <code>${transactionId}</code>`,
+                            confirmButtonText: 'Go to My Parcels',
+                        });
+
+                        navigate('/dashboard/myParcels');
+                    }
                 }
             }
         }
