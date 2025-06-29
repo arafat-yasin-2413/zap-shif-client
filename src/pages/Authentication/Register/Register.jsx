@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
     const {
@@ -11,29 +12,52 @@ const Register = () => {
         formState: { errors },
     } = useForm();
 
-    const {createUser} = useAuth()
+    const { createUser, updateUserProfile } = useAuth();
+    const [profilePic, setProfilePic] = useState("");
 
     const onSubmit = (data) => {
         console.log(data);
         createUser(data.email, data.password)
-        .then(result=>{
-            console.log(result);
-        })
-        .catch(error=>{
-            console.error(error);
-        })
-        
+            .then((result) => {
+                console.log(result);
+
+                // update user info in the database
+
+                
+                // update user profile in firebase
+                const userProfile = {
+                    displayName: data.name,
+                    photoURL: profilePic
+                }
+                updateUserProfile(userProfile)
+                .then(()=>{
+                    console.log('Profile name, picture updated');
+                })
+                .catch(error=>{
+                    console.log(error);
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
-    const handleImageUpload = async(e) => {
+    const handleImageUpload = async (e) => {
         const image = e.target.files[0];
         console.log(image);
+
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append("image", image);
 
-    }
+        const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_image_upload_key
+        }`;
 
+        const res = await axios.post(imageUploadUrl, formData);
 
+        // console.log(res.data);
+        setProfilePic(res.data.data.url);
+    };
 
     return (
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -62,7 +86,6 @@ const Register = () => {
                             placeholder="your profile photo"
                         />
 
-                        
                         {/* email field */}
                         <label className="label">Email</label>
                         <input
@@ -98,13 +121,15 @@ const Register = () => {
                             </p>
                         )}
 
-                        
                         <button className="btn btn-primary text-black mt-4">
                             Register
                         </button>
                     </fieldset>
                     <p>
-                        Already have an Account? <Link to="/login" className="btn btn-link">Login</Link>
+                        Already have an Account?{" "}
+                        <Link to="/login" className="btn btn-link">
+                            Login
+                        </Link>
                     </p>
                 </form>
 
