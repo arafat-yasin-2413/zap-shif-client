@@ -25,6 +25,14 @@ const Register = () => {
         
     };
 
+    const handleImageUpload = async(e) => {
+        const image = e.target.files[0];
+        console.log(image);
+        const formData = new FormData();
+        formData.append('image', image);
+
+    }
+
 
 
     return (
@@ -33,6 +41,28 @@ const Register = () => {
                 <h1 className="text-5xl font-bold">Create Account</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <fieldset className="fieldset">
+                        {/* name field */}
+                        <label className="label">Your Name</label>
+                        <input
+                            type="text"
+                            {...register("name", { required: true })}
+                            className="input"
+                            placeholder="your name"
+                        />
+
+                        {errors.email?.type === "required" && (
+                            <p className="text-red-500">Name is Required</p>
+                        )}
+                        {/* porfile photo field */}
+                        <label className="label">Your Profile Photo</label>
+                        <input
+                            type="file"
+                            onChange={handleImageUpload}
+                            className="input"
+                            placeholder="your profile photo"
+                        />
+
+                        
                         {/* email field */}
                         <label className="label">Email</label>
                         <input
