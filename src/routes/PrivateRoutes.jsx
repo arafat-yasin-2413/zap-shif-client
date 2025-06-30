@@ -10,6 +10,7 @@ const PrivateRoutes = ({children}) => {
 
     // from where the user was coming from ? 
     const from = location.pathname;
+    
     // console.log(from);
 
 
