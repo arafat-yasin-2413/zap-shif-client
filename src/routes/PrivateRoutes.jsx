@@ -6,11 +6,11 @@ const PrivateRoutes = ({children}) => {
     
     const {user, loading} = useAuth();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
     // from where the user was coming from ? 
     const from = location.pathname;
-    console.log(from);
+    // console.log(from);
 
 
     if(loading) {
