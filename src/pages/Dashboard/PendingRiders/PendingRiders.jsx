@@ -121,6 +121,8 @@ const PendingRiders = () => {
                         <h3 className="font-bold text-xl mb-2">
                             Rider Details
                         </h3>
+
+                        
                         <div className="space-y-2">
                             <p>
                                 <strong>Name:</strong> {selectedRider.name}
