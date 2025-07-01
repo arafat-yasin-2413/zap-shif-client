@@ -81,7 +81,7 @@ const Navbar = () => {
                         :
                         <>
                         
-                        <NavLink to='/' className="btn btn-primary text-black">Register</NavLink>
+                        <NavLink to='/register' className="btn btn-primary text-black">Register</NavLink>
                         <NavLink to='/login' className="btn btn-primary text-black">Login</NavLink>
                         </>
                     

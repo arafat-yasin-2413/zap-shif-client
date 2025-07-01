@@ -71,7 +71,7 @@ const Login = () => {
                     </fieldset>
 
                     <p>
-                        New to this website? <Link to="/register" className="btn btn-link">Register</Link>
+                        New to this website? <Link state={{ from }} to="/register" className="btn btn-link">Register</Link>
                     </p>
                 </form>
 
