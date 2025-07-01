@@ -38,6 +38,7 @@ const BeARider = () => {
 
         console.log("Rider Application:", riderData);
 
+        // sending data to backend
         axiosSecure.post('/riders', riderData)
             .then(res => {
                 if(res.data.insertedId){
@@ -46,12 +47,10 @@ const BeARider = () => {
                         title: "Application Submitted!",
                         text: "Your application is pending approval.",
                     });
+                    reset();
                 }
             })
 
-
-
-        // Send to your backend here
         reset();
     };
 

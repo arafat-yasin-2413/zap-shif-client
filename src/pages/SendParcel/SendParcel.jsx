@@ -19,7 +19,7 @@ const SendParcel = () => {
         register,
         handleSubmit,
         watch,
-        control,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -117,6 +117,7 @@ const SendParcel = () => {
                     creation_date: new Date().toISOString(),
                     tracking_id: generateTrackingID(),
                 };
+                reset();
 
                 console.log("Ready for payment:", parcelData);
 
