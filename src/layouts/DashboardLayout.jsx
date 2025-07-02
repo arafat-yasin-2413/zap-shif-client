@@ -10,6 +10,7 @@ import {
     FaUserCheck,
     FaUserClock,
     FaUserShield,
+    FaMotorcycle,
 } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 
@@ -61,31 +62,31 @@ const DashboardLayout = () => {
                     <ProFastLogo></ProFastLogo>
                     <li>
                         <NavLink to="/dashboard">
-                            <FaHome className="inline-block mr-2" />
+                            <FaHome className="inline-block mr-2 text-xl" />
                             Home
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/myParcels">
-                            <FaBoxOpen className="inline-block mr-2" />
+                            <FaBoxOpen className="inline-block mr-2 text-xl" />
                             My Parcels
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/paymentHistory">
-                            <FaMoneyCheckAlt className="inline-block mr-2" />
+                            <FaMoneyCheckAlt className="inline-block mr-2 text-xl" />
                             Payment History
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/track">
-                            <FaSearchLocation className="inline-block mr-2" />
+                            <FaSearchLocation className="inline-block mr-2 text-xl" />
                             Track a Package
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/profile">
-                            <FaUserEdit className="inline-block mr-2" />
+                            <FaUserEdit className="inline-block mr-2 text-xl" />
                             Update Profile
                         </NavLink>
                     </li>
@@ -95,21 +96,30 @@ const DashboardLayout = () => {
                     {!roleLoading && role === "admin" && (
                         <>
                             <li>
+                                <NavLink to="/dashboard/assign-rider">
+                                    <FaMotorcycle className="inline-block mr-2 text-xl"></FaMotorcycle>
+                                    Assign Rider
+                                </NavLink>
+                            </li>
+
+                            <li>
                                 <NavLink to="/dashboard/active-riders">
-                                    <FaUserCheck className="inline-block mr-2" />
+                                    <FaUserCheck className="inline-block mr-2 text-xl" />
                                     Active Riders
                                 </NavLink>
                             </li>
+
+
                             <li>
                                 <NavLink to="/dashboard/pending-riders">
-                                    <FaUserClock className="inline-block mr-2" />
+                                    <FaUserClock className="inline-block mr-2 text-xl" />
                                     Pending Riders
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink to="/dashboard/makeAdmin">
-                                    <FaUserShield className="inline-block mr-2"></FaUserShield>
+                                    <FaUserShield className="inline-block mr-2 text-xl"></FaUserShield>
                                     Make Admin
                                 </NavLink>
                             </li>
