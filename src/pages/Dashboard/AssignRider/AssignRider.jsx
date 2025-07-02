@@ -24,6 +24,8 @@ const AssignRider = () => {
         },
     });
 
+    
+
     const { mutateAsync: assignRider } = useMutation({
         mutationFn: async ({ parcelId, rider }) => {
             const res = await axiosSecure.patch(`/parcels/${parcelId}/assign`, {
